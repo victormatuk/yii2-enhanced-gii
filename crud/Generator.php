@@ -813,9 +813,9 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
                     ]
         ]";
             } elseif ($column->phpType !== 'string' || $column->size === null) {
-                return "'$attribute' => ['type' => TabularForm::$input, 'label' => " . $this->generateString($humanize) . "]";
+                return "'$attribute' => ['type' => TabularForm::$input, 'label' => " . $this->generateString(ucwords($humanize)) . "]";
             } else {
-                return "'$attribute' => ['type' => TabularForm::$input, 'label' => " . $this->generateString($humanize) . "]"; //max length??
+                return "'$attribute' => ['type' => TabularForm::$input, 'label' => " . $this->generateString(ucwords($humanize)) . "]"; //max length??
             }
         }
     }
@@ -920,9 +920,9 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
                 return "\$form->field($model, '$attribute')->dropDownList("
                     . preg_replace("/\n\s*/", ' ', VarDumper::export($dropDownOptions)) . ", ['prompt' => ''])";
             } elseif ($column->phpType !== 'string' || $column->size === null) {
-                return "\$form->field($model, '$attribute')->$input(['placeholder' => Yii::t('app', '$placeholder')])";
+                return "\$form->field($model, '$attribute')->$input(['placeholder' => " . $this->generateString($placeholder) . "])";
             } else {
-                return "\$form->field($model, '$attribute')->$input(['maxlength' => true, 'placeholder' => Yii::t('app', '$placeholder')])";
+                return "\$form->field($model, '$attribute')->$input(['maxlength' => true, 'placeholder' => " . $this->generateString($placeholder) . "])";
             }
         }
     }
