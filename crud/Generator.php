@@ -530,7 +530,7 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
         }
         $humanize = Inflector::humanize($attribute, true);
         if ($tableSchema === false || !isset($tableSchema->columns[$attribute])) {
-            if (preg_match('/^(password|pass|passwd|passcode)$/i', $attribute)) {
+            if (preg_match('/^(password|pass|passwd|passcode|secret)$/i', $attribute)) {
                 return "";
             } else {
                 return "'$attribute',\n";
@@ -574,7 +574,7 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
             return "['attribute' => '$attribute', 'visible' => false],\n";
         }
         if ($tableSchema === false || !isset($tableSchema->columns[$attribute])) {
-            if (preg_match('/^(password|pass|passwd|passcode)$/i', $attribute)) {
+            if (preg_match('/^(password|pass|passwd|passcode|secret)$/i', $attribute)) {
                 return "";
             } else {
                 return "'$attribute',\n";
@@ -618,7 +618,7 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
         }
 //        $humanize = Inflector::humanize($attribute, true);
         if ($tableSchema === false || !isset($tableSchema->columns[$attribute])) {
-            if (preg_match('/^(password|pass|passwd|passcode)$/i', $attribute)) {
+            if (preg_match('/^(password|pass|passwd|passcode|secret)$/i', $attribute)) {
                 return "";
             } else {
                 return "'$attribute',\n";
@@ -690,7 +690,7 @@ if (array_key_exists($attribute, $fk) && $attribute) {
         }
         $humanize = Inflector::humanize($attribute, true);
         if ($tableSchema === false || !isset($tableSchema->columns[$attribute])) {
-            if (preg_match('/^(password|pass|passwd|passcode)$/i', $attribute)) {
+            if (preg_match('/^(password|pass|passwd|passcode|secret)$/i', $attribute)) {
                 return "\"$attribute\" => ['type' => TabularForm::INPUT_PASSWORD]";
             } else {
                 return "\"$attribute\" => ['type' => TabularForm::INPUT_TEXT]";
@@ -770,7 +770,7 @@ if (array_key_exists($attribute, $fk) && $attribute) {
         ]";
             return $output;
         } else {
-            if (preg_match('/^(password|pass|passwd|passcode)$/i', $column->name)) {
+            if (preg_match('/^(password|pass|passwd|passcode|secret)$/i', $column->name)) {
                 $input = 'INPUT_PASSWORD';
             } else {
                 $input = 'INPUT_TEXT';
@@ -818,7 +818,7 @@ if (array_key_exists($attribute, $fk) && $attribute) {
         }
         $placeholder = Inflector::humanize($attribute, true);
         if ($tableSchema === false || !isset($tableSchema->columns[$attribute])) {
-            if (preg_match('/^(password|pass|passwd|passcode)$/i', $attribute)) {
+            if (preg_match('/^(password|pass|passwd|passcode|secret)$/i', $attribute)) {
                 return "\$form->field($model, '$attribute')->passwordInput()";
             } else if (in_array($attribute, $this->hiddenColumns)) {
                 return "\$form->field($model, '$attribute')->hiddenInput()";
@@ -882,7 +882,7 @@ if (array_key_exists($attribute, $fk) && $attribute) {
     ]);";
             return $output;
         } else {
-            if (preg_match('/^(password|pass|passwd|passcode)$/i', $column->name)) {
+            if (preg_match('/^(password|pass|passwd|passcode|secret)$/i', $column->name)) {
                 $input = 'passwordInput';
             } else {
                 $input = 'textInput';
