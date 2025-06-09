@@ -693,6 +693,7 @@ if (array_key_exists($attribute, $fk) && $attribute) {
             if (preg_match('/^(password|pass|passwd|passcode|secret)$/i', $attribute)) {
                 return "\"$attribute\" => ['type' => TabularForm::INPUT_PASSWORD, 'label' => '" . Inflector::humanize($attribute) . "']";
             } else {
+                echo 1;exit;
                 return "\"$attribute\" => ['type' => TabularForm::INPUT_TEXT, 'label' => '" . Inflector::humanize($attribute) . "']";
             }
         }
