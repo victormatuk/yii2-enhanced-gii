@@ -691,9 +691,9 @@ if (array_key_exists($attribute, $fk) && $attribute) {
         $humanize = Inflector::humanize($attribute, true);
         if ($tableSchema === false || !isset($tableSchema->columns[$attribute])) {
             if (preg_match('/^(password|pass|passwd|passcode|secret)$/i', $attribute)) {
-                return "\"$attribute\" => ['type' => TabularForm::INPUT_PASSWORD]";
+                return "\"$attribute\" => ['type' => TabularForm::INPUT_PASSWORD, 'label' => '" . Inflector::humanize($attribute) . "']";
             } else {
-                return "\"$attribute\" => ['type' => TabularForm::INPUT_TEXT]";
+                return "\"$attribute\" => ['type' => TabularForm::INPUT_TEXT, 'label' => '" . Inflector::humanize($attribute) . "']";
             }
         }
         $column = $tableSchema->columns[$attribute];
@@ -701,12 +701,13 @@ if (array_key_exists($attribute, $fk) && $attribute) {
             return "'$attribute' => ['type' => TabularForm::INPUT_HIDDEN]";
         } elseif ($column->phpType === 'boolean' || $column->dbType === 'tinyint(1)') {
             return "'$attribute' => ['type' => TabularForm::INPUT_CHECKBOX,
+            'label' => '" . Inflector::humanize($attribute) . "',
             'options' => [
                 'style' => 'position : relative; margin-top : -9px'
             ]
         ]";
         } elseif ($column->type === 'text' || $column->dbType === 'tinytext') {
-            return "'$attribute' => ['type' => TabularForm::INPUT_TEXTAREA]";
+            return "'$attribute' => ['type' => TabularForm::INPUT_TEXTAREA, 'label' => '" . Inflector::humanize($attribute) . "']";
         } elseif ($column->dbType === 'date') {
             return "'$attribute' => ['type' => TabularForm::INPUT_WIDGET,
             'widgetClass' => \\kartik\\datecontrol\\DateControl::classname(),
@@ -720,7 +721,8 @@ if (array_key_exists($attribute, $fk) && $attribute) {
                         'autoclose' => true
                     ]
                 ],
-            ]
+            ],
+            'label' => " . $this->generateString($humanize) . "
         ]";
         } elseif ($column->dbType === 'time') {
             return "'$attribute' => ['type' => TabularForm::INPUT_WIDGET,
@@ -735,7 +737,8 @@ if (array_key_exists($attribute, $fk) && $attribute) {
                         'autoclose' => true
                     ]
                 ]
-            ]
+            ],
+            'label' => " . $this->generateString($humanize) . "
         ]";
         } elseif ($column->dbType === 'datetime') {
             return "'$attribute' => ['type' => TabularForm::INPUT_WIDGET,
@@ -750,7 +753,8 @@ if (array_key_exists($attribute, $fk) && $attribute) {
                         'autoclose' => true,
                     ]
                 ],
-            ]
+            ],
+            'label' => " . $this->generateString($humanize) . "
         ]";
         } elseif (array_key_exists($column->name, $fk)) {
             $rel = $fk[$column->name];
@@ -766,7 +770,8 @@ if (array_key_exists($attribute, $fk) && $attribute) {
                 'data' => \\yii\\helpers\\ArrayHelper::map($fkClassFQ::find()->orderBy('$labelCol')->asArray()->all(), '{$rel[self::REL_PRIMARY_KEY]}', '$labelCol'),
                 'options' => ['placeholder' => " . $this->generateString('Choose ' . $humanize) . "],
             ],
-            'columnOptions' => ['width' => '200px']
+            'columnOptions' => ['width' => '200px'],
+            'label' => " . $this->generateString($humanize) . "
         ]";
             return $output;
         } else {
