@@ -119,12 +119,6 @@ if ($generator->indexWidgetType === 'grid'):
 <?php endif; ?>
         // your toolbar can include the additional full export menu
         'toolbar' => [
-<?php if(!$generator->pdf):?>
-                'exportConfig' => [
-                    ExportMenu::FORMAT_PDF => false
-                ]
-<?php endif;?>
-            ]) ,
         ],
     ]); ?>
 <?php 
