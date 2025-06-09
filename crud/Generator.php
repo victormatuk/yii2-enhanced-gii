@@ -659,20 +659,19 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
             if ($column->allowNull) {
                 $output = "[
                 'attribute' => '$attribute',
-                'label' => Yii::t('app', ucwords(Inflector::camel2words($rel[5]))), 
+                'label' => " . $this->generateString(ucwords(Inflector::humanize($rel[5]))) . ",
                 'value' => function(\$model){
-                    if (\$model->$rel[7]) {
-                        return \$model->$rel[7]->$labelCol;
-                    } else {
-                        return null;
-                    }
+                    if (\$model->$rel[7])
+                    {return \$model->$rel[7]->$labelCol;}
+                    else
+                    {return NULL;}
                 },
                 'filterType' => GridView::FILTER_SELECT2,
                 'filter' => \\yii\\helpers\\ArrayHelper::map(\\$this->nsModel\\$rel[1]::find()->asArray()->all(), '{$rel[self::REL_PRIMARY_KEY]}', '$labelCol'),
                 'filterWidgetOptions' => [
                     'pluginOptions' => ['allowClear' => true],
                 ],
-                'filterInputOptions' => ['placeholder' => Yii::t('app', ucwords(Inflector::camel2words($humanize))), 'id' => '$id']
+                'filterInputOptions' => ['placeholder' => '$humanize', 'id' => '$id']
             ],\n";
                 return $output;
             } else {
@@ -687,7 +686,7 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
                 'filterWidgetOptions' => [
                     'pluginOptions' => ['allowClear' => true],
                 ],
-                'filterInputOptions' => ['placeholder' => Yii::t('app', ucwords(Inflector::camel2words($humanize))), 'id' => '$id']
+                'filterInputOptions' => ['placeholder' => '".$this->generateString(ucwords($humanize))."', 'id' => '$id']
             ],\n";
                 return $output;
             }
@@ -921,9 +920,9 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
                 return "\$form->field($model, '$attribute')->dropDownList("
                     . preg_replace("/\n\s*/", ' ', VarDumper::export($dropDownOptions)) . ", ['prompt' => ''])";
             } elseif ($column->phpType !== 'string' || $column->size === null) {
-                return "\$form->field($model, '$attribute')->$input(['placeholder' => " . $this->generateString($placeholder) . "])";
+                return "\$form->field($model, '$attribute')->$input(['placeholder' => '$placeholder'])";
             } else {
-                return "\$form->field($model, '$attribute')->$input(['maxlength' => true, 'placeholder' => " . $this->generateString($placeholder) . "])";
+                return "\$form->field($model, '$attribute')->$input(['maxlength' => true, 'placeholder' => '$placeholder'])";
             }
         }
     }
