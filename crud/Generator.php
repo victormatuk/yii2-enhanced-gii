@@ -671,7 +671,7 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
                 'filterWidgetOptions' => [
                     'pluginOptions' => ['allowClear' => true],
                 ],
-                'filterInputOptions' => ['placeholder' => '$humanize', 'id' => '$id']
+                'filterInputOptions' => ['placeholder' => '".$this->generateString(ucwords($humanize))."', 'id' => '$id']
             ],\n";
                 return $output;
             } else {
