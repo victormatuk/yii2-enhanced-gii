@@ -659,19 +659,20 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
             if ($column->allowNull) {
                 $output = "[
                 'attribute' => '$attribute',
-                'label' => " . $this->generateString(ucwords(Inflector::humanize($rel[5]))) . ",
+                'label' => Yii::t('app', ucwords(Inflector::camel2words($rel[5]))), 
                 'value' => function(\$model){
-                    if (\$model->$rel[7])
-                    {return \$model->$rel[7]->$labelCol;}
-                    else
-                    {return NULL;}
+                    if (\$model->$rel[7]) {
+                        return \$model->$rel[7]->$labelCol;
+                    } else {
+                        return null;
+                    }
                 },
                 'filterType' => GridView::FILTER_SELECT2,
                 'filter' => \\yii\\helpers\\ArrayHelper::map(\\$this->nsModel\\$rel[1]::find()->asArray()->all(), '{$rel[self::REL_PRIMARY_KEY]}', '$labelCol'),
                 'filterWidgetOptions' => [
                     'pluginOptions' => ['allowClear' => true],
                 ],
-                'filterInputOptions' => ['placeholder' => '$humanize', 'id' => '$id']
+                'filterInputOptions' => ['placeholder' => Yii::t('app', ucwords(Inflector::camel2words($humanize))), 'id' => '$id']
             ],\n";
                 return $output;
             } else {
@@ -686,7 +687,7 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
                 'filterWidgetOptions' => [
                     'pluginOptions' => ['allowClear' => true],
                 ],
-                'filterInputOptions' => ['placeholder' => '$humanize', 'id' => '$id']
+                'filterInputOptions' => ['placeholder' => Yii::t('app', ucwords(Inflector::camel2words($humanize))), 'id' => '$id']
             ],\n";
                 return $output;
             }
