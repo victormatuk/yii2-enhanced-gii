@@ -920,9 +920,9 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
                 return "\$form->field($model, '$attribute')->dropDownList("
                     . preg_replace("/\n\s*/", ' ', VarDumper::export($dropDownOptions)) . ", ['prompt' => ''])";
             } elseif ($column->phpType !== 'string' || $column->size === null) {
-                return "\$form->field($model, '$attribute')->$input(['placeholder' => '$placeholder'])";
+                return "\$form->field($model, '$attribute')->$input(['placeholder' => " . Yii::t('app', $placeholder) . "])";
             } else {
-                return "\$form->field($model, '$attribute')->$input(['maxlength' => true, 'placeholder' => '$placeholder'])";
+                return "\$form->field($model, '$attribute')->$input(['maxlength' => true, 'placeholder' => " . Yii::t('app', $placeholder) . "])";
             }
         }
     }
