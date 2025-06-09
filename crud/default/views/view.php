@@ -137,7 +137,7 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
         <?php elseif (empty($rel[2])): ?>
             <div class="row">
-                <h4><?= Yii::t('app', $rel[1]) ?><?= "<?= " ?>' '. Html::encode($this->title) ?></h4>
+                <h4><?= "Yii::t('app', '".$rel[1].")" ?><?= "<?= " ?>' '. Html::encode($this->title) ?></h4>
             </div>
             <?= "<?php \n" ?>
             $gridColumn<?= $rel[1] ?> = [
