@@ -671,7 +671,7 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
                 'filterWidgetOptions' => [
                     'pluginOptions' => ['allowClear' => true],
                 ],
-                'filterInputOptions' => ['placeholder' => ".$this->generateString(ucwords($humanize)).", 'id' => '$id']
+                'filterInputOptions' => ['placeholder' => " . $this->generateString(ucwords($humanize)) . ", 'id' => '$id']
             ],\n";
                 return $output;
             } else {
@@ -686,7 +686,7 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
                 'filterWidgetOptions' => [
                     'pluginOptions' => ['allowClear' => true],
                 ],
-                'filterInputOptions' => ['placeholder' => ".$this->generateString(ucwords($humanize)).", 'id' => '$id']
+                'filterInputOptions' => ['placeholder' => " . $this->generateString(ucwords($humanize)) . ", 'id' => '$id']
             ],\n";
                 return $output;
             }
@@ -711,9 +711,9 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
         $humanize = Inflector::humanize($attribute, true);
         if ($tableSchema === false || !isset($tableSchema->columns[$attribute])) {
             if (preg_match('/^(password|pass|passwd|passcode|secret)$/i', $attribute)) {
-                return "\"$attribute\" => ['type' => TabularForm::INPUT_PASSWORD, 'label' => " . $this->generateString(Inflector::humanize($attribute)) . "]";
+                return "\"$attribute\" => ['type' => TabularForm::INPUT_PASSWORD, 'label' => " . ucwords($this->generateString($humanize)) . "]";
             } else {
-                return "\"$attribute\" => ['type' => TabularForm::INPUT_TEXT, 'label' => " . $this->generateString(Inflector::humanize($attribute)) . "]";
+                return "\"$attribute\" => ['type' => TabularForm::INPUT_TEXT, 'label' => " . ucwords($this->generateString($humanize)) . "]";
             }
         }
         $column = $tableSchema->columns[$attribute];
@@ -721,13 +721,13 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
             return "'$attribute' => ['type' => TabularForm::INPUT_HIDDEN]";
         } elseif ($column->phpType === 'boolean' || $column->dbType === 'tinyint(1)') {
             return "'$attribute' => ['type' => TabularForm::INPUT_CHECKBOX,
-            'label' => '" . Inflector::humanize($attribute) . "',
             'options' => [
-                'style' => 'position : relative; margin-top : -9px'
-            ]
+                'style' => 'position : relative; margin-top : -9px;'
+            ],
+            'label' => '" . ucwords($this->generateString($humanize)) . "',
         ]";
         } elseif ($column->type === 'text' || $column->dbType === 'tinytext') {
-            return "'$attribute' => ['type' => TabularForm::INPUT_TEXTAREA, 'label' => " . $this->generateString(Inflector::humanize($attribute)) . "]";
+            return "'$attribute' => ['type' => TabularForm::INPUT_TEXTAREA, 'label' => " . ucwords($this->generateString(Inflector::humanize($attribute))) . "]";
         } elseif ($column->dbType === 'date') {
             return "'$attribute' => ['type' => TabularForm::INPUT_WIDGET,
             'widgetClass' => \\kartik\\datecontrol\\DateControl::classname(),
@@ -737,12 +737,12 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
                 'ajaxConversion' => true,
                 'options' => [
                     'pluginOptions' => [
-                        'placeholder' => " . $this->generateString('Choose ' . $humanize) . ",
+                        'placeholder' => " . ucwords($this->generateString('Choose ' . $humanize)) . ",
                         'autoclose' => true
                     ]
                 ],
             ],
-            'label' => " . $this->generateString($humanize) . "
+            'label' => " . ucwords($this->generateString($humanize)) . "
         ]";
         } elseif ($column->dbType === 'time') {
             return "'$attribute' => ['type' => TabularForm::INPUT_WIDGET,
@@ -753,12 +753,12 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
                 'ajaxConversion' => true,
                 'options' => [
                     'pluginOptions' => [
-                        'placeholder' => " . $this->generateString('Choose ' . $humanize) . ",
+                        'placeholder' => " . ucwords($this->generateString('Choose ' . $humanize)) . ",
                         'autoclose' => true
                     ]
                 ]
             ],
-            'label' => " . $this->generateString($humanize) . "
+            'label' => " . ucwords($this->generateString($humanize)) . "
         ]";
         } elseif ($column->dbType === 'datetime') {
             return "'$attribute' => ['type' => TabularForm::INPUT_WIDGET,
@@ -769,12 +769,12 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
                 'ajaxConversion' => true,
                 'options' => [
                     'pluginOptions' => [
-                        'placeholder' => " . $this->generateString('Choose ' . $humanize) . ",
+                        'placeholder' => " . ucwords($this->generateString('Choose ' . $humanize)) . ",
                         'autoclose' => true,
                     ]
                 ],
             ],
-            'label' => " . $this->generateString($humanize) . "
+            'label' => " . ucwords($this->generateString($humanize)) . "
         ]";
         } elseif (array_key_exists($column->name, $fk)) {
             $rel = $fk[$column->name];
@@ -783,15 +783,14 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
             //            $pk = empty($this->tableSchema->primaryKey) ? $this->tableSchema->getColumnNames()[0] : $this->tableSchema->primaryKey[0];
             $fkClassFQ = "\\" . $this->nsModel . "\\" . $rel[self::REL_CLASS];
             $output = "'$attribute' => [
-            'label' => '$humanize',
             'type' => TabularForm::INPUT_WIDGET,
             'widgetClass' => \\kartik\\widgets\\Select2::className(),
             'options' => [
                 'data' => \\yii\\helpers\\ArrayHelper::map($fkClassFQ::find()->orderBy('$labelCol')->asArray()->all(), '{$rel[self::REL_PRIMARY_KEY]}', '$labelCol'),
-                'options' => ['placeholder' => " . $this->generateString('Choose ' . $humanize) . "],
+                'options' => ['placeholder' => " . ucwords($this->generateString('Choose ' . $humanize)) . "],
             ],
             'columnOptions' => ['width' => '200px'],
-            'label' => " . $this->generateString($humanize) . "
+            'label' => " . ucwords($this->generateString($humanize)) . "
         ]";
             return $output;
         } else {
@@ -809,13 +808,14 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
                     'items' => " . preg_replace("/\n\s*/", ' ', VarDumper::export($dropDownOptions)) . ",
                     'options' => [
                         'columnOptions' => ['width' => '185px'],
-                        'options' => ['placeholder' => " . $this->generateString('Choose ' . $humanize) . "],
+                        'label' => " . ucwords($this->generateString($humanize)) . ",
+                        'options' => ['placeholder' => " . ucwords($this->generateString('Choose ' . $humanize)) . "],
                     ]
         ]";
             } elseif ($column->phpType !== 'string' || $column->size === null) {
-                return "'$attribute' => ['type' => TabularForm::$input, 'label' => " . $this->generateString(ucwords($humanize)) . "]";
+                return "'$attribute' => ['type' => TabularForm::$input, 'label' => " . ucwords($this->generateString($humanize)) . "]";
             } else {
-                return "'$attribute' => ['type' => TabularForm::$input, 'label' => " . $this->generateString(ucwords($humanize)) . "]"; //max length??
+                return "'$attribute' => ['type' => TabularForm::$input, 'label' => " . ucwords($this->generateString($humanize)) . "]"; //max length??
             }
         }
     }
