@@ -711,9 +711,9 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
         $humanize = Inflector::humanize($attribute, true);
         if ($tableSchema === false || !isset($tableSchema->columns[$attribute])) {
             if (preg_match('/^(password|pass|passwd|passcode|secret)$/i', $attribute)) {
-                return "\"$attribute\" => ['type' => TabularForm::INPUT_PASSWORD, 'label' => '" . Inflector::humanize($attribute) . "']";
+                return "\"$attribute\" => ['type' => TabularForm::INPUT_PASSWORD, 'label' => " . $this->generateString(Inflector::humanize($attribute)) . "]";
             } else {
-                return "\"$attribute\" => ['type' => TabularForm::INPUT_TEXT, 'label' => '" . Inflector::humanize($attribute) . "']";
+                return "\"$attribute\" => ['type' => TabularForm::INPUT_TEXT, 'label' => " . $this->generateString(Inflector::humanize($attribute)) . "]";
             }
         }
         $column = $tableSchema->columns[$attribute];
@@ -727,7 +727,7 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
             ]
         ]";
         } elseif ($column->type === 'text' || $column->dbType === 'tinytext') {
-            return "'$attribute' => ['type' => TabularForm::INPUT_TEXTAREA, 'label' => '" . Inflector::humanize($attribute) . "']";
+            return "'$attribute' => ['type' => TabularForm::INPUT_TEXTAREA, 'label' => " . $this->generateString(Inflector::humanize($attribute)) . "]";
         } elseif ($column->dbType === 'date') {
             return "'$attribute' => ['type' => TabularForm::INPUT_WIDGET,
             'widgetClass' => \\kartik\\datecontrol\\DateControl::classname(),
