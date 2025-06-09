@@ -19,7 +19,6 @@ echo "<?php\n";
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 use yii\helpers\Html;
-use kartik\export\ExportMenu;
 use <?= $generator->indexWidgetType === 'grid' ? "kartik\\grid\\GridView;" : "yii\\widgets\\ListView;" ?>
 
 
@@ -120,19 +119,6 @@ if ($generator->indexWidgetType === 'grid'):
 <?php endif; ?>
         // your toolbar can include the additional full export menu
         'toolbar' => [
-            '{export}',
-            ExportMenu::widget([
-                'dataProvider' => $dataProvider,
-                'columns' => $gridColumn,
-                'target' => ExportMenu::TARGET_BLANK,
-                'fontAwesome' => true,
-                'dropdownOptions' => [
-                    'label' => 'Full',
-                    'class' => 'btn btn-default',
-                    'itemsBefore' => [
-                        '<li class="dropdown-header">Export All Data</li>',
-                    ],
-                ],
 <?php if(!$generator->pdf):?>
                 'exportConfig' => [
                     ExportMenu::FORMAT_PDF => false
