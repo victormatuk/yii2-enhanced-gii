@@ -97,7 +97,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="row">
                 <?= "<?php\n" ?>
                 if($provider<?= $rel[1] ?>->totalCount){
-                $gridColumn<?= $rel[1] ?> = [
+                <?= Yii::t('app', $gridColumn) ?><?= $rel[1] ?> = [
                 ['class' => 'yii\grid\SerialColumn'],
                 <?php
                 $relTableSchema = $generator->getDbConnection()->getTableSchema($rel[3]);
@@ -140,7 +140,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <h4><?= $rel[1] ?><?= "<?= " ?>' '. Html::encode($this->title) ?></h4>
             </div>
             <?= "<?php \n" ?>
-            $gridColumn<?= $rel[1] ?> = [
+            <?= Yii::t('app', $gridColumn) ?><?= $rel[1] ?> = [
             <?php
             $relTableSchema = $generator->getDbConnection()->getTableSchema($rel[3]);
             $fkRel = $generator->generateFK($relTableSchema);
@@ -162,7 +162,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ];
             echo DetailView::widget([
             'model' => $model-><?= $name ?>,
-            'attributes' => $gridColumn<?= $rel[1] ?>
+            'attributes' => <?= Yii::t('app', $gridColumn) ?><?= $rel[1] ?>
             ]);
             ?>
         <?php endif; ?>
