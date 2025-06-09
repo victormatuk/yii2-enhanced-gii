@@ -97,7 +97,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="row">
                 <?= "<?php\n" ?>
                 if($provider<?= $rel[1] ?>->totalCount){
-                Yii::t('app', $gridColumn)<?= $rel[1] ?> = [
+                $gridColumn<?= $rel[1] ?> = [
                 ['class' => 'yii\grid\SerialColumn'],
                 <?php
                 $relTableSchema = $generator->getDbConnection()->getTableSchema($rel[3]);
@@ -129,7 +129,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?php if (!$generator->pdf): ?>
                     'export' => false,
                 <?php endif; ?>
-                'columns' => Yii::t('app', $gridColumn)<?= $rel[1] . "\n" ?>
+                'columns' => $gridColumn<?= $rel[1] . "\n" ?>
                 ]);
                 }
                 <?= "?>\n" ?>
@@ -137,10 +137,10 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
         <?php elseif (empty($rel[2])): ?>
             <div class="row">
-                <h4><?= $rel[1] ?><?= "<?= " ?>' '. Html::encode($this->title) ?></h4>
+                <h4><?= Yii::t('app', $rel[1]) ?><?= "<?= " ?>' '. Html::encode($this->title) ?></h4>
             </div>
             <?= "<?php \n" ?>
-            Yii::t('app', $gridColumn)<?= $rel[1] ?> = [
+            $gridColumn<?= $rel[1] ?> = [
             <?php
             $relTableSchema = $generator->getDbConnection()->getTableSchema($rel[3]);
             $fkRel = $generator->generateFK($relTableSchema);
@@ -162,7 +162,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ];
             echo DetailView::widget([
             'model' => $model-><?= $name ?>,
-            'attributes' => Yii::t('app', $gridColumn)<?= $rel[1] ?>
+            'attributes' => $gridColumn<?= $rel[1] ?>
             ]);
             ?>
         <?php endif; ?>
