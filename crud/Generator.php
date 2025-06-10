@@ -24,7 +24,7 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
 
     public $nameAttribute = 'name, title, username';
     public $hiddenColumns = 'id, lock';
-    public $skippedColumns = 'created_at, updated_at, created_by, updated_by, deleted_at, deleted_by, created, modified, deleted';
+    public $skippedColumns = 'accessToken, authKey, password_hash, created_at, updated_at, created_by, updated_by, deleted_at, deleted_by, created, modified, deleted';
     public $nsModel = 'app\models';
     public $nsSearchModel = 'app\models';
     public $generateSearchModel;
