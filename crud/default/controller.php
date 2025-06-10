@@ -24,7 +24,7 @@ $skippedRelations = array_map(function($value){
 echo "<?php\n";
 ?>
 
-namespace <?= StringHelper::dirname(ltrim($generator->controllerClass, '\\')) ?>;
+namespace <?= StringHelper::dirname(ltrim($generator->controllerClass, '\\')) ?>\base;
 
 use Yii;
 use <?= ltrim($generator->modelClass, '\\') ?>;

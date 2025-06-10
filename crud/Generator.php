@@ -58,6 +58,7 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
     public $viewPath = '@app/views';
     public $baseControllerClass = 'yii\web\Controller';
     public $indexWidgetType = 'grid';
+    public $generateBaseOnly = false;
     public $relations;
 
 
@@ -98,7 +99,7 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
             //            [['searchModelClass'], 'validateNewClass'],
             [['indexWidgetType'], 'in', 'range' => ['grid', 'list']],
             //            [['modelClass'], 'validateModelClass'],
-            [['enableI18N', 'generateRelations', 'generateSearchModel', 'pluralize', 'expandable', 'cancelable', 'pdf', 'loggedUserOnly'], 'boolean'],
+            [['enableI18N', 'generateRelations', 'generateSearchModel', 'pluralize', 'expandable', 'cancelable', 'pdf', 'loggedUserOnly', 'generateBaseOnly'], 'boolean'],
             [['messageCategory'], 'validateMessageCategory', 'skipOnEmpty' => false],
             [
                 [
@@ -142,7 +143,8 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
             'searchModelClass' => 'Search Model Class',
             'expandable' => 'Expandable Index Grid View',
             'cancelable' => 'Add Cancel Button On Form',
-            'pdf' => 'PDF Printable View'
+            'pdf' => 'PDF Printable View',
+            'generateBaseOnly' => 'Generate Base Controller Only',
         ]);
     }
 
@@ -244,7 +246,8 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
                 the namespace part as it is specified in "ActiveQuery Namespace". You do not need to specify the class name
                 if "Table Name" ends with asterisk, in which case multiple ActiveQuery classes will be generated.',
             'queryBaseClass' => 'This is the base class of the new ActiveQuery class. It should be a fully qualified namespaced class name.',
-            'saveAsNew' => 'Creates a new model by another data, so user don\'t need to input all field from scratch.'
+            'saveAsNew' => 'Creates a new model by another data, so user don\'t need to input all field from scratch.',
+            'generateBaseOnly' => 'This indicates whether the generator should generate extended controller(where you write your code) or not. You usually re-generate controllers when you make changes on your database.'
         ]);
     }
 
@@ -341,7 +344,7 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
 
             //controller
             $files[] = new CodeFile(
-                Yii::getAlias('@' . str_replace('\\', '/', $this->nsController)) . '/' . $controllerClassName . '.php',
+                Yii::getAlias('@' . str_replace('\\', '/', $this->nsController)) . '/base/' . $controllerClassName . '.php',
                 ($isTree) ?
                 $this->render('controllerNested.php', [
                     'relations' => isset($relations[$tableName]) ? $relations[$tableName] : [],
@@ -351,6 +354,15 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
                     'relations' => isset($relations[$tableName]) ? $relations[$tableName] : [],
                 ])
             );
+            if (!$this->generateBaseOnly) {
+                $params = [
+                    'className' => $controllerClassName
+                ];
+                $files[] = new CodeFile(
+                    Yii::getAlias('@' . str_replace('\\', '/', $this->nsController)) . '/' . $controllerClassName . '.php',
+                    $this->render('controller-extended.php', $params)
+                );
+            }
 
             // views :
             $viewPath = $this->getViewPath();

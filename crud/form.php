@@ -5,8 +5,11 @@
 ?>
 <blockquote class="alert-warning" style="font-size: small">
     <strong>Note : </strong><br />
-    To generate nested or tree, please use <a href="http://demos.krajee.com/tree-manager#prepare-database">kartik-v\yii2-tree-manager</a> for table structure<br />
-    <strong>If table contains all the defined columns, the generator will automatically generate CRUD that uses </strong><a href="http://demos.krajee.com/tree-manager#tree-view">kartik\tree\TreeView</a>
+    To generate nested or tree, please use <a
+        href="http://demos.krajee.com/tree-manager#prepare-database">kartik-v\yii2-tree-manager</a> for table
+    structure<br />
+    <strong>If table contains all the defined columns, the generator will automatically generate CRUD that uses
+    </strong><a href="http://demos.krajee.com/tree-manager#tree-view">kartik\tree\TreeView</a>
 </blockquote>
 <?php
 echo $form->errorSummary($generator);
@@ -51,7 +54,10 @@ echo $form->field($generator, 'baseControllerClass');
 </div>
 <div class="row">
     <div class="col-md-12">
-        <?=  $form->field($generator, 'useTablePrefix')->checkbox(); ?>
+        <?= $form->field($generator, 'useTablePrefix')->checkbox(); ?>
+    </div>
+    <div class="col-md-6">
+        <?= $form->field($generator, 'generateBaseOnly')->checkbox(); ?>
     </div>
 </div>
 
