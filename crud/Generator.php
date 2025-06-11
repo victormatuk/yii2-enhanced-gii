@@ -820,9 +820,9 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
                     'items' => " . preg_replace("/\n\s*/", ' ', VarDumper::export($dropDownOptions)) . ",
                     'options' => [
                         'columnOptions' => ['width' => '185px'],
-                        'label' => " . ucwords($this->generateString($humanize)) . ",
-                        'options' => ['placeholder' => " . ucwords($this->generateString('Choose ' . $humanize)) . "],
-                    ]
+                        'options' => ['placeholder' => " . ucwords($this->generateString('Choose ' . $humanize)) . "]
+                    ],
+                    'label' => " . ucwords($this->generateString($humanize)) . "
         ]";
             } elseif ($column->phpType !== 'string' || $column->size === null) {
                 return "'$attribute' => ['type' => TabularForm::$input, 'label' => " . ucwords($this->generateString($humanize)) . "]";
