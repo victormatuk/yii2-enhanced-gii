@@ -93,7 +93,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
     <?php foreach ($relations as $name => $rel): ?>
         <?php if ($rel[2] && isset($rel[3]) && !in_array($name, $generator->skippedRelations)): ?>
-
+            <!--
             <div class="row">
                 <?= "<?php\n" ?>
                 if($provider<?= $rel[1] ?>->totalCount){
@@ -134,9 +134,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
                 <?= "?>\n" ?>
 
-            </div>
+            </div>-->
         <?php elseif (empty($rel[2])): ?>
-            <div class="row">
+            <!--<div class="row">
                 <h4><?= "<?= Yii::t('app', '".$rel[1]."'); ?>" ?><?= "<?= " ?>' '. Html::encode($this->title) ?></h4>
             </div>
             <?= "<?php \n" ?>
@@ -164,7 +164,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'model' => $model-><?= $name ?>,
             'attributes' => $gridColumn<?= $rel[1] ?>
             ]);
-            ?>
+            ?>-->
         <?php endif; ?>
     <?php endforeach; ?>
 </div>
