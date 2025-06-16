@@ -93,6 +93,7 @@ if ($generator->indexWidgetType === 'grid'):
         endforeach; ?>
         [
             'class' => 'yii\grid\ActionColumn',
+            'contentOptions' => ['class' => 'whitespace-nowrap px-2 w-1'],
 <?php if($generator->saveAsNew) { ?>
             'template' => '<div class="btn-group">{save-as-new} {view} {update} {delete}</div>',
         <?php } else { ?>
