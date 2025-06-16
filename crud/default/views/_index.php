@@ -35,13 +35,13 @@ $this->registerJs($search);
 <div class="<?= Inflector::camel2id($baseModelClass) ?>-index">
 
     <h1><?= "<?= " ?>Html::encode($this->title) ?></h1>
-<?php if (!empty($generator->searchModelClass)): ?>
+<?php if (!empty($generator->searchModelClass) && $generator->advancedSearch): ?>
 <?= "    <?php " . ($generator->indexWidgetType === 'grid' ? "// " : "") ?>echo $this->render('_search', ['model' => $searchModel]); ?>
 <?php endif; ?>
 
     <p>
         <?= "<?= " ?>Html::a(<?= $generator->generateString('Create ' . Inflector::camel2words($baseModelClass)) ?>, ['create'], ['class' => 'btn btn-success']) ?>
-<?php if (!empty($generator->searchModelClass) && $generator->advancedSearch): ?>
+<?php if (!empty($generator->searchModelClass)): ?>
         <?= "<?= " ?>Html::a(<?= $generator->generateString('Advance Search')?>, '#', ['class' => 'btn btn-info search-button']) ?>
 <?php endif; ?>
     </p>
@@ -93,35 +93,14 @@ if ($generator->indexWidgetType === 'grid'):
         endforeach; ?>
         [
             'class' => 'yii\grid\ActionColumn',
-        <?php if($generator->saveAsNew) { ?>
+<?php if($generator->saveAsNew): ?>
             'template' => '{save-as-new} {view} {update} {delete}',
-        <?php } else { ?>
-            'template' => '{view} {update} {delete}',
-        <?php } ?>
             'buttons' => [
-                'view' => function ($url, $model) {
-                    return Html::a('<i class="fa-solid fa-eye"></i>', $url, [
-                        'class' => 'btn btn-default btn-sm border-0 btn-view'
-                    ]);
-                },
-                'update' => function ($url, $model) {
-                    return Html::a('<i class="fa-solid fa-pencil"></i>', $url, [
-                        'class' => 'btn btn-default btn-sm border-0 btn-update',
-                    ]);
-                },
-                'delete' => function ($url, $model) {
-                    return Html::a('<i class="fa-solid fa-trash"></i>', $url, [
-                        'class' => 'btn btn-default btn-sm border-0 btn-delete',
-                        'data-confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
-                        'data-method' => 'post',
-                    ]);
-                },
-                <?php if($generator->saveAsNew): ?>
                 'save-as-new' => function ($url) {
                     return Html::a('<span class="glyphicon glyphicon-copy"></span>', $url, ['title' => 'Save As New']);
                 },
-                <?php endif; ?>
             ],
+<?php endif; ?>
         ],
     ]; 
 <?php 
@@ -133,16 +112,9 @@ if ($generator->indexWidgetType === 'grid'):
         <?= !empty($generator->searchModelClass) ? "'filterModel' => \$searchModel,\n        'columns' => \$gridColumn,\n" : "'columns' => \$gridColumn,\n"; ?>
         'pjax' => true,
         'pjaxSettings' => ['options' => ['id' => 'kv-pjax-container-<?= Inflector::camel2id(StringHelper::basename($generator->modelClass))?>']],
-        'striped' => true, 
-        'bordered' => false, 
         'panel' => [
-            // 'heading' => false,
-           'before' => false,
-           'after' => false,
-            // 'footer' => false,
-            // 'type' => GridView::TYPE_PRIMARY,
-            // 'heading' => '<span class="glyphicon glyphicon-book"></span>  ' . Html::encode($this->title),
-            // 'headingOptions' => ['class' => 'panel-etc'],
+            'type' => GridView::TYPE_PRIMARY,
+            'heading' => '<span class="glyphicon glyphicon-book"></span>  ' . Html::encode($this->title),
         ],
 <?php if(!$generator->pdf) : ?>
         'export' => false,
