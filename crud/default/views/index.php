@@ -121,6 +121,7 @@ if ($generator->indexWidgetType === 'grid'):
                     return Html::a('<span class="glyphicon glyphicon-copy"></span>', $url, ['title' => 'Save As New']);
                 },
                 <?php endif; ?>
+                'template' => '<div class="btn-group">{view} {update} {delete}</div>'
             ],
         ],
     ]; 
