@@ -710,7 +710,17 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
                 return $output;
             }
         } else {
-            return "'$attribute" . ($format === 'text' ? "" : ":" . $format) . "',\n";
+            if ($format === 'ntext') {
+                return "[
+                    'attribute' => '$attribute',
+                    'format' => 'raw',
+                    'value' => function(\$model) {
+                        return '<textarea rows=\"10\" disabled>'.\yii\helpers\Html::encode(\$model->$attribute).'</textarea>';
+                    }
+                ],\n";
+            } else {
+                return "'$attribute" . ($format === 'text' ? "" : ":" . $format) . "',\n";  
+            }
         }
     }
 
