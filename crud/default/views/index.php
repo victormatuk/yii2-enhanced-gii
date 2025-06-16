@@ -111,7 +111,7 @@ if ($generator->indexWidgetType === 'grid'):
                 },
                 'delete' => function ($url, $model) {
                     return Html::a('<i class="fa-solid fa-trash"></i>', $url, [
-                        'class' => 'btn btn-default btn-sm border-0 btn-delete'
+                        'class' => 'btn btn-default btn-sm border-0 btn-delete',
                         'data-confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
                         'data-method' => 'post',
                     ]);
