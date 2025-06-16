@@ -24,7 +24,7 @@ use kartik\grid\GridView;
 
     <div class="row">
         <div class="col-sm-9">
-            <h2><?= "<?= " ?>Html::encode($model-><?= $generator->getNameAttribute() ?>) ?></h2>
+            <h2 class="text-2xl font-semibold mt-6 mb-3"><?= "<?= " ?>Html::encode($model-><?= $generator->getNameAttribute() ?>) ?></h2>
         </div>
     </div>
 

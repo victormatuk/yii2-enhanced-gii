@@ -30,7 +30,7 @@ use kartik\grid\GridView;
 
     <div class="row">
         <div class="col-sm-9">
-            <h2><?= "<?= " ?>Html::encode($model-><?= $generator->getNameAttributeFK($relations[$generator::REL_TABLE]) ?>) ?></h2>
+            <h2 class="text-2xl font-semibold mt-6 mb-3"><?= "<?= " ?>Html::encode($model-><?= $generator->getNameAttributeFK($relations[$generator::REL_TABLE]) ?>) ?></h2>
         </div>
     </div>
 
@@ -65,7 +65,7 @@ use kartik\grid\GridView;
 <div class="<?= Inflector::camel2id($relations[$generator::REL_CLASS]) ?>-view">
     <div class="row">
         <div class="col-sm-9">
-            <h2><?= $relations[$generator::REL_CLASS] ?></h2>
+            <h2 class="text-2xl font-semibold mt-6 mb-3"><?= $relations[$generator::REL_CLASS] ?></h2>
         </div>
     </div>
     <div class="row">

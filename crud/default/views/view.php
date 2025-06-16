@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="flex justify-content-between align-items-center mb-3">
         <div class="grow">
-            <h2><?= "<?= " ?><?= $generator->generateString(Inflector::camel2words(StringHelper::basename($generator->modelClass))) ?>.'
+            <h2 class="text-2xl font-semibold mt-6 mb-3"><?= "<?= " ?><?= $generator->generateString(Inflector::camel2words(StringHelper::basename($generator->modelClass))) ?>.'
                 '. Html::encode($this->title) ?></h2>
         </div>
         <div class="btn-group">
