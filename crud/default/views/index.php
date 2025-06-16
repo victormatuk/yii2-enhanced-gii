@@ -94,9 +94,9 @@ if ($generator->indexWidgetType === 'grid'):
         [
             'class' => 'yii\grid\ActionColumn',
 <?php if($generator->saveAsNew) { ?>
-            'template' => '<div class="btn-group">{save-as-new} {view} {update} {delete}</div>'
+            'template' => '<div class="btn-group">{save-as-new} {view} {update} {delete}</div>',
         <?php } else { ?>
-            'template' => '<div class="btn-group">{view} {update} {delete}</div>'
+            'template' => '<div class="btn-group">{view} {update} {delete}</div>',
         <?php } ?>
             'buttons' => [
                 'view' => function ($url, $model) {
