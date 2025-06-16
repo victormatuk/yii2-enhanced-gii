@@ -3,7 +3,7 @@
 use yii\helpers\Inflector;
 use yii\helpers\StringHelper;
 
-/* @var $this yii\web\View */
+/* @var $this yii\web\View  */
 /* @var $generator \mootensai\enhancedgii\crud\Generator */
 
 $urlParams = $generator->generateUrlParams();
