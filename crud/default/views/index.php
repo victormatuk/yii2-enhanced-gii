@@ -41,7 +41,7 @@ $this->registerJs($search);
 
     <p>
         <?= "<?= " ?>Html::a(<?= $generator->generateString('Create ' . Inflector::camel2words($baseModelClass)) ?>, ['create'], ['class' => 'btn btn-success']) ?>
-<?php if (!empty($generator->searchModelClass)): ?>
+<?php if (!empty($generator->searchModelClass) && $generator->advancedSearch): ?>
         <?= "<?= " ?>Html::a(<?= $generator->generateString('Advance Search')?>, '#', ['class' => 'btn btn-info search-button']) ?>
 <?php endif; ?>
     </p>
