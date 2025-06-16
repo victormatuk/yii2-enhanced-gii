@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <h2><?= "<?= " ?><?= $generator->generateString(Inflector::camel2words(StringHelper::basename($generator->modelClass))) ?>.'
                 '. Html::encode($this->title) ?></h2>
         </div>
-        <div class="">
+        <div class="btn-group">
             <?php if ($generator->pdf): ?>
                 <?= "<?= " ?>
                 <?= "
