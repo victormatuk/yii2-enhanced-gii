@@ -52,6 +52,7 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
     public $pluralize;
     public $loggedUserOnly;
     public $expandable;
+    public $advancedSearch;
     public $cancelable;
     public $saveAsNew;
     public $pdf;
@@ -99,7 +100,7 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
             //            [['searchModelClass'], 'validateNewClass'],
             [['indexWidgetType'], 'in', 'range' => ['grid', 'list']],
             //            [['modelClass'], 'validateModelClass'],
-            [['enableI18N', 'generateRelations', 'generateSearchModel', 'pluralize', 'expandable', 'cancelable', 'pdf', 'loggedUserOnly', 'generateBaseOnly'], 'boolean'],
+            [['advancedSearch', 'enableI18N', 'generateRelations', 'generateSearchModel', 'pluralize', 'expandable', 'cancelable', 'pdf', 'loggedUserOnly', 'generateBaseOnly'], 'boolean'],
             [['messageCategory'], 'validateMessageCategory', 'skipOnEmpty' => false],
             [
                 [
@@ -142,6 +143,7 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
             'indexWidgetType' => 'Widget Used in Index Page',
             'searchModelClass' => 'Search Model Class',
             'expandable' => 'Expandable Index Grid View',
+            'advancedSearch' => 'Advanced Search',
             'cancelable' => 'Add Cancel Button On Form',
             'pdf' => 'PDF Printable View',
             'generateBaseOnly' => 'Generate Base Controller Only',
@@ -226,6 +228,7 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
             'nsModel' => 'This is the namespace of the ActiveRecord class to be generated, e.g., <code>app\models</code>',
             'pluralize' => 'Set the generator to generate pluralize for label',
             'expandable' => 'Set the generator to generate expandable/collapsible row for related at index',
+            'advancedSearch' => 'Show Advanced Search on index page',
             'cancelable' => 'Set the generator to generate cancel button to return to grid view at form',
             'pdf' => 'Set the generator to generate printable PDF generator at view',
             'viewPath' => 'Specify the directory for storing the view scripts for the controller. You may use path alias here, e.g.,
@@ -363,7 +366,7 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
                     $this->render('controller-extended.php', $params)
                 );
             }
-
+            
             // views :
             $viewPath = $this->getViewPath();
             $templatePath = $this->getTemplatePath() . '/views';
@@ -393,8 +396,12 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
                 if (!$isTree && ($file === 'indexNested.php' || $file === '_formNested.php')) {
                     continue;
                 }
+                
                 if (is_file($templatePath . '/' . $file) && pathinfo($file, PATHINFO_EXTENSION) === 'php') {
                     $fileName = ($isTree) ? str_replace('Nested', '', $file) : $file;
+                    if($fileName === '_search.php' && !$this->advancedSearch) {
+                        continue;
+                    }
                     $files[] = new CodeFile("$viewPath/$fileName", $this->render("views/$file", [
                         'relations' => isset($relations[$tableName]) ? $relations[$tableName] : [],
                         'isTree' => $isTree
