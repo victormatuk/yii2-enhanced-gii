@@ -39,12 +39,6 @@ $this->registerJs($search);
 <?= "    <?php " . ($generator->indexWidgetType === 'grid' ? "// " : "") ?>echo $this->render('_search', ['model' => $searchModel]); ?>
 <?php endif; ?>
 
-    <p>
-        <?= "<?= " ?>Html::a(<?= $generator->generateString('Create ' . Inflector::camel2words($baseModelClass)) ?>, ['create'], ['class' => 'btn btn-success']) ?>
-<?php if (!empty($generator->searchModelClass) && $generator->advancedSearch): ?>
-        <?= "<?= " ?>Html::a(<?= $generator->generateString('Advance Search')?>, '#', ['class' => 'btn btn-info search-button']) ?>
-<?php endif; ?>
-    </p>
 <?php if (!empty($generator->searchModelClass) && $generator->advancedSearch): ?>
     <div class="search-form" style="display:none">
         <?= "<?= " ?> $this->render('_search', ['model' => $searchModel]); ?>
@@ -140,7 +134,7 @@ if ($generator->indexWidgetType === 'grid'):
         'bordered' => false,
         'panel' => [
             // 'heading' => false,
-           'before' => false,
+            // 'before' => false,
            'after' => false,
             // 'footer' => false,
             // 'type' => GridView::TYPE_PRIMARY,
@@ -152,6 +146,11 @@ if ($generator->indexWidgetType === 'grid'):
 <?php endif; ?>
         // your toolbar can include the additional full export menu
         'toolbar' => [
+            <?= "<?= " ?>Html::a(<?= $generator->generateString('Create ' . Inflector::camel2words($baseModelClass)) ?>, ['create'], ['class' => 'btn btn-success']) ?>
+<?php if (!empty($generator->searchModelClass) && $generator->advancedSearch): ?>
+        <?= "<?= " ?>Html::a(<?= $generator->generateString('Advance Search')?>, '#', ['class' => 'btn btn-info search-button']) ?>
+<?php endif; ?>
+            'options' => ['class' => 'btn-group mr-2 me-2']
         ],
         'rowOptions' => function ($model, $key, $index, $grid) {
             return ['class' => 'align-middle'];
