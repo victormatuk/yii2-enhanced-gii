@@ -34,10 +34,19 @@ $this->registerJs($search);
 ?>
 <div class="<?= Inflector::camel2id($baseModelClass) ?>-index">
 
+<div class="d-flex justify-between items-center mb-4">
     <h1 class="text-3xl font-bold"><?= "<?= " ?>Html::encode($this->title) ?></h1>
+    <p>
+        <?= "<?= " ?>Html::a(<?= $generator->generateString('Create ' . Inflector::camel2words($baseModelClass)) ?>, ['create'], ['class' => 'btn btn-success']) ?>
 <?php if (!empty($generator->searchModelClass) && $generator->advancedSearch): ?>
-<?= "    <?php " . ($generator->indexWidgetType === 'grid' ? "// " : "") ?>echo $this->render('_search', ['model' => $searchModel]); ?>
+        <?= "<?= " ?>Html::a(<?= $generator->generateString('Advance Search')?>, '#', ['class' => 'btn btn-info search-button']) ?>
 <?php endif; ?>
+
+        <?php if (!empty($generator->searchModelClass) && $generator->advancedSearch): ?>
+        <?= "    <?php " . ($generator->indexWidgetType === 'grid' ? "// " : "") ?>echo $this->render('_search', ['model' => $searchModel]); ?>
+        <?php endif; ?>
+    </p>
+</div>
 
 <?php if (!empty($generator->searchModelClass) && $generator->advancedSearch): ?>
     <div class="search-form" style="display:none">
@@ -134,7 +143,7 @@ if ($generator->indexWidgetType === 'grid'):
         'bordered' => false,
         'panel' => [
             // 'heading' => false,
-            // 'before' => false,
+           'before' => false,
            'after' => false,
             // 'footer' => false,
             // 'type' => GridView::TYPE_PRIMARY,
@@ -146,11 +155,6 @@ if ($generator->indexWidgetType === 'grid'):
 <?php endif; ?>
         // your toolbar can include the additional full export menu
         'toolbar' => [
-            Html::a(<?= $generator->generateString('Create ' . Inflector::camel2words($baseModelClass)) ?>, ['create'], ['class' => 'btn btn-success'])
-<?php if (!empty($generator->searchModelClass) && $generator->advancedSearch): ?>
-            . Html::a(<?= $generator->generateString('Advance Search')?>, '#', ['class' => 'btn btn-info search-button'])
-<?php endif; ?>
-            , 'options' => ['class' => 'btn-group mr-2 me-2']
         ],
         'rowOptions' => function ($model, $key, $index, $grid) {
             return ['class' => 'align-middle'];
