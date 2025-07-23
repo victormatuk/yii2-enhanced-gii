@@ -366,7 +366,7 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
                     $this->render('controller-extended.php', $params)
                 );
             }
-            
+
             // views :
             $viewPath = $this->getViewPath();
             $templatePath = $this->getTemplatePath() . '/views';
@@ -396,10 +396,10 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
                 if (!$isTree && ($file === 'indexNested.php' || $file === '_formNested.php')) {
                     continue;
                 }
-                
+
                 if (is_file($templatePath . '/' . $file) && pathinfo($file, PATHINFO_EXTENSION) === 'php') {
                     $fileName = ($isTree) ? str_replace('Nested', '', $file) : $file;
-                    if($fileName === '_search.php' && !$this->advancedSearch) {
+                    if ($fileName === '_search.php' && !$this->advancedSearch) {
                         continue;
                     }
                     $files[] = new CodeFile("$viewPath/$fileName", $this->render("views/$file", [
@@ -715,11 +715,14 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
                     'attribute' => '$attribute',
                     'format' => 'raw',
                     'value' => function(\$model) {
-                        return '<textarea rows=\"10\" disabled>'.\yii\helpers\Html::encode(\$model->$attribute).'</textarea>';
+                        \$content = \$model->$attribute;
+                        \$lines = substr_count(\$content, \"\\n\") + 1;
+                        \$rows = min(max(\$lines, 2), 15); // mínimo 2, máximo 15 linhas
+                        return '<textarea rows=\"' . \$rows . '\" disabled>' . \yii\helpers\Html::encode(\$content) . '</textarea>';
                     }
                 ],\n";
             } else {
-                return "'$attribute" . ($format === 'text' ? "" : ":" . $format) . "',\n";  
+                return "'$attribute" . ($format === 'text' ? "" : ":" . $format) . "',\n";
             }
         }
     }
