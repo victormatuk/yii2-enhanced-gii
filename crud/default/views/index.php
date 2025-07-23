@@ -150,7 +150,7 @@ if ($generator->indexWidgetType === 'grid'):
 <?php if (!empty($generator->searchModelClass) && $generator->advancedSearch): ?>
             . Html::a(<?= $generator->generateString('Advance Search')?>, '#', ['class' => 'btn btn-info search-button'])
 <?php endif; ?>
-            'options' => ['class' => 'btn-group mr-2 me-2']
+            , 'options' => ['class' => 'btn-group mr-2 me-2']
         ],
         'rowOptions' => function ($model, $key, $index, $grid) {
             return ['class' => 'align-middle'];
