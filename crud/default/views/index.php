@@ -146,9 +146,9 @@ if ($generator->indexWidgetType === 'grid'):
 <?php endif; ?>
         // your toolbar can include the additional full export menu
         'toolbar' => [
-            <?= "<?= " ?>Html::a(<?= $generator->generateString('Create ' . Inflector::camel2words($baseModelClass)) ?>, ['create'], ['class' => 'btn btn-success']) ?>
+            Html::a(<?= $generator->generateString('Create ' . Inflector::camel2words($baseModelClass)) ?>, ['create'], ['class' => 'btn btn-success'])
 <?php if (!empty($generator->searchModelClass) && $generator->advancedSearch): ?>
-        <?= "<?= " ?>Html::a(<?= $generator->generateString('Advance Search')?>, '#', ['class' => 'btn btn-info search-button']) ?>
+            . Html::a(<?= $generator->generateString('Advance Search')?>, '#', ['class' => 'btn btn-info search-button'])
 <?php endif; ?>
             'options' => ['class' => 'btn-group mr-2 me-2']
         ],
