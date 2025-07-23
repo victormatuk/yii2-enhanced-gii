@@ -20,8 +20,9 @@ $this->params['breadcrumbs'][] = ['label' => <?= ($generator->pluralize) ? $gene
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-create">
-
-    <h1 class="text-3xl font-bold"><?= "<?= " ?>Html::encode($this->title) ?></h1>
+    <div class="flex justify-content-between align-items-center mb-3">
+        <h1 class="text-3xl font-bold"><?= "<?= " ?>Html::encode($this->title) ?></h1>
+    </div>
 
     <?= "<?= " ?>$this->render('_form', [
         'model' => $model,

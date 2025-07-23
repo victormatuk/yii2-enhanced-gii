@@ -27,8 +27,9 @@ $this->params['breadcrumbs'][] = ['label' => $model-><?= $generator->getNameAttr
 $this->params['breadcrumbs'][] = <?= $generator->generateString('Update') ?>;
 ?>
 <div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-update">
-
-    <h1 class="text-3xl font-bold"><?= "<?= " ?>Html::encode($this->title) ?></h1>
+    <div class="flex justify-content-between align-items-center mb-3">
+        <h1 class="text-3xl font-bold"><?= "<?= " ?>Html::encode($this->title) ?></h1>
+    </div>
 
     <?= "<?= " ?>$this->render('_form', [
         'model' => $model,

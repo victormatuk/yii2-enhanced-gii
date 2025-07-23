@@ -29,10 +29,8 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-view">
 
     <div class="flex justify-content-between align-items-center mb-3">
-        <div class="grow">
-            <h2 class="text-3xl font-bold mb-2"><?= "<?= " ?><?= $generator->generateString(Inflector::camel2words(StringHelper::basename($generator->modelClass))) ?>.'
-                '. Html::encode($this->title) ?></h2>
-        </div>
+        <h1 class="text-3xl font-bold"><?= "<?= " ?><?= $generator->generateString(Inflector::camel2words(StringHelper::basename($generator->modelClass))) ?>.'
+            '. Html::encode($this->title) ?></h1>
         <div class="btn-group">
             <?php if ($generator->pdf): ?>
                 <?= "<?= " ?>
