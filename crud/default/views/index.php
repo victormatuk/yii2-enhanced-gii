@@ -146,7 +146,7 @@ if ($generator->indexWidgetType === 'grid'):
            'before' => false,
            'after' => false,
             // 'footer' => false,
-            // 'type' => GridView::TYPE_PRIMARY,
+            'type' => GridView::TYPE_SECONDARY,
             // 'heading' => '<span class="glyphicon glyphicon-book"></span>  ' . Html::encode($this->title),
             // 'headingOptions' => ['class' => 'panel-etc'],
         ],
