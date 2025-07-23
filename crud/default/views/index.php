@@ -153,6 +153,9 @@ if ($generator->indexWidgetType === 'grid'):
         // your toolbar can include the additional full export menu
         'toolbar' => [
         ],
+        'rowOptions' => function ($model, $key, $index, $grid) {
+            return ['class' => 'align-middle'];
+        },
     ]); ?>
 <?php 
 else: 
