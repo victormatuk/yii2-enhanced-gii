@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = ['label' =>
 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-view shadow-sm p-3 bg-body rounded">
+<div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-view">
 
     <div class="flex justify-content-between align-items-center mb-3">
         <div class="grow">
@@ -64,7 +64,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 
-    <div class="row">
+    <div class="col-md-12 shadow-sm p-3 bg-body rounded">
         <?= "<?php \n" ?>
         $gridColumn = [
         <?php
