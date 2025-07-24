@@ -141,6 +141,13 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
     {
         $model = new <?= $modelClass ?>();
 
+        <?php
+        foreach ($generator->getTableSchema()->foreignKeys as $fk) {
+             $fkColumn = array_keys($fk)[1]; // normalmente só tem uma chave (id_application)
+            echo "\$model->$fkColumn = Yii::\$app->request->get('$fkColumn');\n";
+        }
+        ?>
+
         if ($model->loadAll(Yii::$app->request->post()<?= !empty($generator->skippedRelations) ? ", [".implode(", ", $skippedRelations)."]" : ""; ?>) && $model->saveAll(<?= !empty($generator->skippedRelations) ? "[".implode(", ", $skippedRelations)."]" : ""; ?>)) {
             return $this->redirect(['view', <?= $urlParams ?>]);
         } else {
