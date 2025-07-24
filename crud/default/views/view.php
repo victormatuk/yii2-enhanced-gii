@@ -121,7 +121,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= "<?php\n" ?>
                 if($provider<?= $rel[1] ?>->totalCount){
                 $gridColumn<?= $rel[1] ?> = [
-                ['class' => 'yii\grid\SerialColumn'],
+                [
+                    'class' => 'yii\grid\SerialColumn'
+                    'contentOptions' => ['class' => 'whitespace-nowrap px-2 w-1']
+                ],
                 <?php
                 $relTableSchema = $generator->getDbConnection()->getTableSchema($rel[3]);
                 $fkRel = $generator->generateFK($relTableSchema);
