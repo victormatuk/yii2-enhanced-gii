@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
              Html::a('<i class=\"fa glyphicon glyphicon-hand-up\"></i> ' . " . $generator->generateString('PDF') . ", 
                 ['pdf', $urlParams],
                 [
-                    'class' => 'btn btn-danger',
+                    'class' => 'btn btn-danger btn-sm d-flex align-items-center',
                     'target' => '_blank',
                     'data-toggle' => 'tooltip',
                     'title' => " . $generator->generateString('Will open the generated PDF file in a new window') . "
@@ -47,21 +47,21 @@ $this->params['breadcrumbs'][] = $this->title;
                     ?>
             <?php endif; ?>
             <?php if ($generator->saveAsNew): ?>
-                <?= "            <?= Html::a(" . $generator->generateString('Save As New') . ", ['save-as-new', " . $generator->generateUrlParams() . "], ['class' => 'btn btn-info']) ?>" ?>
+                <?= "            <?= Html::a(" . $generator->generateString('Save As New') . ", ['save-as-new', " . $generator->generateUrlParams() . "], ['class' => 'btn btn-info btn-sm d-flex align-items-center']) ?>" ?>
             <?php endif; ?>
 
             <!-- remover se necessario INICIO -->
             <?php foreach ($relations as $name => $rel): ?>
                 <?php if ($rel[2] && isset($rel[3]) && !in_array($name, $generator->skippedRelations)): ?>
-                    <?= "<?= Html::a(Yii::t('app', 'Add " . Inflector::camel2words($rel[1]) . "'), ['/" . Inflector::camel2id($rel[1]) . "/create', 'id_" . Inflector::camel2id(StringHelper::basename($generator->modelClass)) . "' => \$model->" . $pk . "], ['class' => 'btn btn-primary d-flex align-items-center']) ?>\n" ?>
+                    <?= "<?= Html::a(Yii::t('app', 'Add " . Inflector::camel2words($rel[1]) . "'), ['/" . Inflector::camel2id($rel[1]) . "/create', 'id_" . Inflector::camel2id(StringHelper::basename($generator->modelClass)) . "' => \$model->" . $pk . "], ['class' => 'btn btn-primary btn-sm d-flex align-items-center']) ?>\n" ?>
                 <?php endif; ?>
             <?php endforeach; ?>
             <!-- remover se necessario FIM -->
 
             <?= "
-            <?= Html::a(" . $generator->generateString('Update') . ", ['update', " . $generator->generateUrlParams() . "], ['class' => 'btn btn-success d-flex align-items-center']) ?>
+            <?= Html::a(" . $generator->generateString('Update') . ", ['update', " . $generator->generateUrlParams() . "], ['class' => 'btn btn-success btn-sm d-flex align-items-center']) ?>
             <?= Html::a(" . $generator->generateString('Delete') . ", ['delete', " . $generator->generateUrlParams() . "], [
-                'class' => 'btn btn-danger d-flex align-items-center',
+                'class' => 'btn btn-danger btn-sm d-flex align-items-center',
                 'data' => [
                     'confirm' => " . $generator->generateString('Are you sure you want to delete this item?') . ",
                     'method' => 'post',
