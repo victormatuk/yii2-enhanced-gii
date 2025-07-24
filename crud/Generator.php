@@ -715,7 +715,7 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
                     'attribute' => '$attribute',
                     'format' => 'raw',
                     'value' => function(\$model) {
-                        return '<textarea rows=\"3\" disabled class=\"w-full\">'.\yii\helpers\Html::encode(\$model->$attribute).'</textarea>';
+                        return '<textarea rows=\"2\" disabled class=\"w-full\">'.\yii\helpers\Html::encode(\$model->$attribute).'</textarea>';
                     }
                 ],\n";
             } else {
