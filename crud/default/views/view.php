@@ -147,7 +147,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 'panel' => [
                 'type' => GridView::TYPE_SECONDARY,
                 'heading' => '<p class="text-lg font-bold"><span class="glyphicon glyphicon-book"></span> ' .
-                    Html::encode(<?= $generator->generateString(Inflector::camel2words($rel[1])) ?>).'</p>',
+                    Html::encode(<?= $generator->generateString(
+                        Inflector::pluralize(Inflector::camel2words($rel[1]))
+                    ) ?>) . '</p>',
                 ],
                 <?php if (!$generator->pdf): ?>
                     'export' => false,
@@ -163,7 +165,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="card-header bg-secondary text-white">
                     <p class="text-lg font-bold">
                         <!-- <i class="fa-solid fa-window-maximize" style="margin-right: 10px;"></i> -->
-                        <?= "<?= Yii::t('app', '" . $rel[1] . "'); ?>" ?>         <?= "<?= " ?>' '. Html::encode($this->title) ?>
+                        <?= "<?= Yii::t('app', '" . $rel[1] . "'); ?>" ?>
                     </p>
                 </div>
                 <?= "<?php \n" ?>
