@@ -59,9 +59,9 @@ $this->params['breadcrumbs'][] = $this->title;
             <!-- remover se necessario FIM -->
 
             <?= "
-            <?= Html::a(" . $generator->generateString('Update') . ", ['update', " . $generator->generateUrlParams() . "], ['class' => 'btn btn-primary']) ?>
+            <?= Html::a(" . $generator->generateString('Update') . ", ['update', " . $generator->generateUrlParams() . "], ['class' => 'btn btn-success d-flex align-items-center']) ?>
             <?= Html::a(" . $generator->generateString('Delete') . ", ['delete', " . $generator->generateUrlParams() . "], [
-                'class' => 'btn btn-danger',
+                'class' => 'btn btn-danger d-flex align-items-center',
                 'data' => [
                     'confirm' => " . $generator->generateString('Are you sure you want to delete this item?') . ",
                     'method' => 'post',
