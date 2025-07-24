@@ -71,7 +71,13 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 
-    <div class="col-md-12 shadow-sm p-3 bg-body rounded">
+    <div class="card border-secondary mb-3">
+        <div class="card-header bg-secondary text-white">
+            <p class="text-lg font-bold">
+                <!-- <i class="fa-solid fa-window-maximize" style="margin-right: 10px;"></i> -->
+                <?= "<?= " ?><?= $generator->generateString(StringHelper::basename($generator->modelClass)) ?><?= "?>" ?>
+            </p>
+        </div>
         <?= "<?php \n" ?>
         $gridColumn = [
         <?php
@@ -98,9 +104,20 @@ $this->params['breadcrumbs'][] = $this->title;
         ]);
         ?>
     </div>
+
+    <?php
+    // Ordenar relações filhas primeiro
+    uasort($relations, function ($a, $b) {
+        if ($a[2] === $b[2]) {
+            return 0;
+        }
+        return ($a[2] === false) ? -1 : 1;
+    });
+    ?>
+
     <?php foreach ($relations as $name => $rel): ?>
         <?php if ($rel[2] && isset($rel[3]) && !in_array($name, $generator->skippedRelations)): ?>
-            <div class="row">
+            <div class="row mb-3">
                 <?= "<?php\n" ?>
                 if($provider<?= $rel[1] ?>->totalCount){
                 $gridColumn<?= $rel[1] ?> = [
@@ -128,49 +145,54 @@ $this->params['breadcrumbs'][] = $this->title;
                 'pjax' => true,
                 'pjaxSettings' => ['options' => ['id' => 'kv-pjax-container-<?= Inflector::camel2id($rel[3]) ?>']],
                 'panel' => [
-                'type' => GridView::TYPE_PRIMARY,
-                'heading' => '<span class="glyphicon glyphicon-book"></span> ' .
-                Html::encode(<?= $generator->generateString(Inflector::camel2words($rel[1])) ?>),
+                'type' => GridView::TYPE_SECONDARY,
+                'heading' => '<p class="text-lg font-bold"><span class="glyphicon glyphicon-book"></span> ' .
+                    Html::encode(<?= $generator->generateString(Inflector::camel2words($rel[1])) ?>).'</p>',
                 ],
                 <?php if (!$generator->pdf): ?>
                     'export' => false,
                 <?php endif; ?>
+                'toggleData' => false,
                 'columns' => $gridColumn<?= $rel[1] . "\n" ?>
                 ]);
                 }
                 <?= "?>\n" ?>
-
             </div>
         <?php elseif (empty($rel[2])): ?>
-            <div class="row">
-                <h4><?= "<?= Yii::t('app', '" . $rel[1] . "'); ?>" ?><?= "<?= " ?>' '. Html::encode($this->title) ?></h4>
+            <div class="card border-secondary mb-3">
+                <div class="card-header bg-secondary text-white">
+                    <p class="text-lg font-bold">
+                        <!-- <i class="fa-solid fa-window-maximize" style="margin-right: 10px;"></i> -->
+                        <?= "<?= Yii::t('app', '" . $rel[1] . "'); ?>" ?>         <?= "<?= " ?>' '. Html::encode($this->title) ?>
+                    </p>
+                </div>
+                <?= "<?php \n" ?>
+                $gridColumn<?= $rel[1] ?> = [
+                <?php
+                $relTableSchema = $generator->getDbConnection()->getTableSchema($rel[3]);
+                $fkRel = $generator->generateFK($relTableSchema);
+                foreach ($relTableSchema->getColumnNames() as $attribute) {
+                    if ($attribute == $rel[5]) {
+                        continue;
+                    }
+                    if ($relTableSchema === false) {
+                        if (!in_array($attribute, $generator->skippedColumns)) {
+                            echo "        '" . $attribute . "',\n";
+                        }
+                    } else {
+                        if (!in_array($attribute, $generator->skippedColumns)) {
+                            echo "        " . $generator->generateDetailViewField($attribute, $fkRel);
+                        }
+                    }
+                }
+                ?>
+                ];
+                echo DetailView::widget([
+                'model' => $model-><?= $name ?>,
+                'attributes' => $gridColumn<?= $rel[1] ?>
+                ]);
+                ?>
             </div>
-            <?= "<?php \n" ?>
-            $gridColumn<?= $rel[1] ?> = [
-            <?php
-            $relTableSchema = $generator->getDbConnection()->getTableSchema($rel[3]);
-            $fkRel = $generator->generateFK($relTableSchema);
-            foreach ($relTableSchema->getColumnNames() as $attribute) {
-                if ($attribute == $rel[5]) {
-                    continue;
-                }
-                if ($relTableSchema === false) {
-                    if (!in_array($attribute, $generator->skippedColumns)) {
-                        echo "        '" . $attribute . "',\n";
-                    }
-                } else {
-                    if (!in_array($attribute, $generator->skippedColumns)) {
-                        echo "        " . $generator->generateDetailViewField($attribute, $fkRel);
-                    }
-                }
-            }
-            ?>
-            ];
-            echo DetailView::widget([
-            'model' => $model-><?= $name ?>,
-            'attributes' => $gridColumn<?= $rel[1] ?>
-            ]);
-            ?>
         <?php endif; ?>
     <?php endforeach; ?>
 </div>
