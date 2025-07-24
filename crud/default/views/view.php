@@ -29,8 +29,10 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-view">
 
     <div class="flex justify-content-between align-items-center mb-3">
-        <h1 class="text-3xl font-bold"><?= "<?= " ?><?= $generator->generateString(Inflector::camel2words(StringHelper::basename($generator->modelClass))) ?>.'
-            '. Html::encode($this->title) ?></h1>
+        <h1 class="text-3xl font-bold">
+            <?= "<?= " ?><?= $generator->generateString(Inflector::camel2words(StringHelper::basename($generator->modelClass))) ?>.'
+            '. Html::encode($this->title) ?>
+        </h1>
         <div class="btn-group">
             <?php if ($generator->pdf): ?>
                 <?= "<?= " ?>
@@ -98,7 +100,6 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
     <?php foreach ($relations as $name => $rel): ?>
         <?php if ($rel[2] && isset($rel[3]) && !in_array($name, $generator->skippedRelations)): ?>
-            <!--
             <div class="row">
                 <?= "<?php\n" ?>
                 if($provider<?= $rel[1] ?>->totalCount){
@@ -140,10 +141,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= "?>\n" ?>
 
             </div>
-            -->
         <?php elseif (empty($rel[2])): ?>
-            <!--<div class="row">
-                <h4><?= "<?= Yii::t('app', '".$rel[1]."'); ?>" ?><?= "<?= " ?>' '. Html::encode($this->title) ?></h4>
+            <div class="row">
+                <h4><?= "<?= Yii::t('app', '" . $rel[1] . "'); ?>" ?><?= "<?= " ?>' '. Html::encode($this->title) ?></h4>
             </div>
             <?= "<?php \n" ?>
             $gridColumn<?= $rel[1] ?> = [
@@ -171,7 +171,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'attributes' => $gridColumn<?= $rel[1] ?>
             ]);
             ?>
-            -->
         <?php endif; ?>
     <?php endforeach; ?>
 </div>
