@@ -65,7 +65,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= "<?php \n" ?>
             $gridColumn = [
             [
-            'class' => 'yii\grid\SerialColumn'
+            'class' => 'yii\grid\SerialColumn',
             'contentOptions' => ['class' => 'whitespace-nowrap px-2 w-1']
             ],
             <?php
