@@ -157,7 +157,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'after' => false,
             // 'footer' => false,
             'type' => GridView::TYPE_SECONDARY,
-            // 'heading' => '<span class="glyphicon glyphicon-book"></span> ' . Html::encode($this->title),
+            // 'heading' => '<span class="fas fa-book"></span> ' . Html::encode($this->title),
             // 'headingOptions' => ['class' => 'panel-etc'],
             ],
             <?php if (!$generator->pdf): ?>

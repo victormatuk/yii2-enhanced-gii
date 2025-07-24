@@ -118,7 +118,7 @@ if ($generator->indexWidgetType === 'grid'):
                 },
                 <?php if($generator->saveAsNew): ?>
                 'save-as-new' => function ($url) {
-                    return Html::a('<span class="glyphicon glyphicon-copy"></span>', $url, ['title' => 'Save As New']);
+                    return Html::a('<span class="fas fa-copy"></span>', $url, ['title' => 'Save As New']);
                 },
                 <?php endif; ?>
             ],
@@ -141,7 +141,7 @@ if ($generator->indexWidgetType === 'grid'):
            'after' => false,
             // 'footer' => false,
             // 'type' => GridView::TYPE_PRIMARY,
-            // 'heading' => '<span class="glyphicon glyphicon-book"></span>  ' . Html::encode($this->title),
+            // 'heading' => '<span class="fas fa-book"></span>  ' . Html::encode($this->title),
             // 'headingOptions' => ['class' => 'panel-etc'],
         ],
 <?php if(!$generator->pdf) : ?>
