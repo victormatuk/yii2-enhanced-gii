@@ -53,7 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <!-- remover se necessario INICIO -->
             <?php foreach ($relations as $name => $rel): ?>
                 <?php if ($rel[2] && isset($rel[3]) && !in_array($name, $generator->skippedRelations)): ?>
-                    <?= "<?= Html::a(Yii::t('app', 'Add " . Inflector::camel2words($rel[1]) . "'), ['/" . Inflector::camel2id($rel[1]) . "/create', 'id_" . Inflector::camel2id(StringHelper::basename($generator->modelClass)) . "' => \$model->" . $pk . "], ['class' => 'btn btn-primary']) ?>\n" ?>
+                    <?= "<?= Html::a(Yii::t('app', 'Add " . Inflector::camel2words($rel[1]) . "'), ['/" . Inflector::camel2id($rel[1]) . "/create', 'id_" . Inflector::camel2id(StringHelper::basename($generator->modelClass)) . "' => \$model->" . $pk . "], ['class' => 'btn btn-primary d-flex align-items-center']) ?>\n" ?>
                 <?php endif; ?>
             <?php endforeach; ?>
             <!-- remover se necessario FIM -->
